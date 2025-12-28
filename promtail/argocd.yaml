@@ -1,23 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: promtail
   namespace: argocd
 spec:
   project: default
   sources:
     - repoURL: https://grafana.github.io/helm-charts
-      chart: loki
-      targetRevision: 6.24.0
+      chart: promtail
+      targetRevision: 6.16.6
       helm:
         valueFiles:
-          - $values/loki/helm-values/loki.yaml
+          - $values/promtail/helm-values.yaml
     - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
       targetRevision: HEAD
       ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: logging
+    namespace: promtail
   syncPolicy:
     automated:
       prune: true

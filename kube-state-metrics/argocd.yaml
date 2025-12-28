@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: kube-state-metrics
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,23 +11,19 @@ spec:
   sources:
     # Helm chart from external repository
     - repoURL: https://prometheus-community.github.io/helm-charts
-      chart: kube-prometheus-stack
-      targetRevision: 80.0.0
+      chart: kube-state-metrics
+      targetRevision: 5.25.1
       helm:
         valueFiles:
-          - $values/prometheus/helm-values/kube-prometheus-stack.yaml
+          - $values/kube-state-metrics/helm-values.yaml
     # Values file from Git repository
     - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
       targetRevision: main
       ref: values
-    # Vault secrets from Git repository
-    - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
-      targetRevision: main
-      path: prometheus
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: kube-state-metrics
 
   syncPolicy:
     automated:

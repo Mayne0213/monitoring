@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: alertmanager
+  name: goldilocks
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,12 +10,12 @@ spec:
 
   sources:
     # Helm chart from external repository
-    - repoURL: https://prometheus-community.github.io/helm-charts
-      chart: alertmanager
-      targetRevision: 1.29.0
+    - repoURL: https://charts.fairwinds.com/stable
+      chart: goldilocks
+      targetRevision: 8.0.2
       helm:
         valueFiles:
-          - $values/alertmanager/helm-values/alertmanager.yaml
+          - $values/goldilocks/helm-values.yaml
     # Values file from Git repository
     - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
       targetRevision: main
@@ -23,7 +23,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: goldilocks
 
   syncPolicy:
     automated:
@@ -35,6 +35,7 @@ spec:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - PruneLast=true
+      - RespectIgnoreDifferences=true
 
     retry:
       limit: 5
@@ -42,5 +43,12 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 3m
+
+  # Ignore Deployment differences for CPU limits (set to null)
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jqPathExpressions:
+        - '.spec.template.spec.containers[].resources.limits.cpu'
 
   revisionHistoryLimit: 10

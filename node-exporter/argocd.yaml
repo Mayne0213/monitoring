@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
+  name: node-exporter
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,24 +10,20 @@ spec:
 
   sources:
     # Helm chart from external repository
-    - repoURL: https://grafana.github.io/helm-charts
-      chart: grafana
-      targetRevision: 10.3.0
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: prometheus-node-exporter
+      targetRevision: 4.39.0
       helm:
         valueFiles:
-          - $values/grafana/helm-values/grafana.yaml
+          - $values/node-exporter/helm-values.yaml
     # Values file from Git repository
     - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
       targetRevision: main
       ref: values
-    # Vault secrets from Git repository
-    - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
-      targetRevision: main
-      path: grafana
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: node-exporter
 
   syncPolicy:
     automated:

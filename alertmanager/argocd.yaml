@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: node-exporter
+  name: alertmanager
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,11 +11,11 @@ spec:
   sources:
     # Helm chart from external repository
     - repoURL: https://prometheus-community.github.io/helm-charts
-      chart: prometheus-node-exporter
-      targetRevision: 4.39.0
+      chart: alertmanager
+      targetRevision: 1.29.0
       helm:
         valueFiles:
-          - $values/node-exporter/helm-values/node-exporter.yaml
+          - $values/alertmanager/helm-values.yaml
     # Values file from Git repository
     - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
       targetRevision: main
@@ -23,7 +23,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: alertmanager
 
   syncPolicy:
     automated:
