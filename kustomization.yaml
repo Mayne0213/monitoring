@@ -3,3 +3,13 @@ kind: Kustomization
 
 resources:
   - application.yaml
+
+  # 각 앱의 ArgoCD Application 중앙 관리
+  - alertmanager/argocd.yaml
+  - grafana/argocd.yaml
+  - kube-state-metrics/argocd.yaml
+  - loki/argocd.yaml
+  - node-exporter/argocd.yaml
+  - prometheus/argocd.yaml
+  - promtail/argocd.yaml
+  - goldilocks/argocd.yaml
