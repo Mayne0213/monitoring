@@ -20,10 +20,7 @@ spec:
     - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
       targetRevision: main
       ref: values
-    # Vault secrets from Git repository
-    - repoURL: https://gitea0213.kro.kr/bluemayne/monitoring.git
-      targetRevision: main
-      path: grafana
+    # Note: ExternalSecret and Ingress are managed manually via kubectl apply -k grafana/
 
   destination:
     server: https://kubernetes.default.svc
