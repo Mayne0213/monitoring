@@ -17,6 +17,9 @@ spec:
   - repoURL: https://github.com/Mayne0213/monitoring.git
     targetRevision: main
     ref: values
+  - repoURL: https://github.com/Mayne0213/monitoring.git
+    targetRevision: main
+    path: goldilocks
   destination:
     server: https://kubernetes.default.svc
     namespace: goldilocks
