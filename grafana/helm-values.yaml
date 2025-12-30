@@ -97,11 +97,7 @@ dashboards:
       gnetId: 16888
       revision: 9
       datasource: Prometheus
-    # MinIO
-    minio:
-      gnetId: 13502
-      revision: 26
-      datasource: Prometheus
+    # MinIO - 수동 import 사용 (변수 자동 매핑 필요)
     # Cert-Manager
     cert-manager:
       gnetId: 11001
