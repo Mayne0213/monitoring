@@ -54,9 +54,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://prymitive.github.io/karma
+    repoURL: https://wiremind.github.io/wiremind-helm-charts
     chart: karma
-    targetRevision: 2.0.1
+    targetRevision: 2.11.0
     helm:
       values: |
         fullnameOverride: karma
