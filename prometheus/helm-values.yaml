@@ -66,8 +66,8 @@ prometheus:
     # Alertmanager 설정
     alertingEndpoints:
       - name: alertmanager
-        namespace: prometheus
-        port: http-web
+        namespace: alertmanager
+        port: http
         scheme: http
 
 # Alertmanager (기존 alertmanager 사용)
