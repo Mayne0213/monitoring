@@ -97,11 +97,6 @@ dashboards:
       gnetId: 16888
       revision: 9
       datasource: Prometheus
-    # MinIO
-    minio:
-      gnetId: 13502
-      revision: 26
-      datasource: Prometheus
     # Cert-Manager
     cert-manager:
       gnetId: 11001
