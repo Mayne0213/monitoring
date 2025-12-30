@@ -22,6 +22,9 @@ prometheus:
     additionalLabels:
       release: prometheus
     namespace: prometheus
+    namespaceSelector:
+      matchNames:
+        - node-exporter
     attachMetadata:
       node: true
     relabelings:
