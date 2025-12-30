@@ -47,6 +47,72 @@ datasources:
       url: http://loki.loki.svc.cluster.local:3100
       editable: true
 
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    # Node Exporter Full - 노드 상세 메트릭
+    node-exporter-full:
+      gnetId: 1860
+      revision: 37
+      datasource: Prometheus
+    # Kubernetes Cluster Overview
+    kubernetes-views-global:
+      gnetId: 15760
+      revision: 28
+      datasource: Prometheus
+    # Kubernetes Pods
+    kubernetes-views-pods:
+      gnetId: 15760
+      revision: 28
+      datasource: Prometheus
+    # ArgoCD
+    argocd:
+      gnetId: 14584
+      revision: 1
+      datasource: Prometheus
+    # Loki Logs
+    loki-logs:
+      gnetId: 13639
+      revision: 2
+      datasource: Loki
+    # Longhorn Storage
+    longhorn:
+      gnetId: 16888
+      revision: 9
+      datasource: Prometheus
+    # MinIO
+    minio:
+      gnetId: 13502
+      revision: 26
+      datasource: Prometheus
+    # Cert-Manager
+    cert-manager:
+      gnetId: 11001
+      revision: 1
+      datasource: Prometheus
+    # CoreDNS
+    coredns:
+      gnetId: 14981
+      revision: 2
+      datasource: Prometheus
+    # Traefik
+    traefik:
+      gnetId: 17346
+      revision: 9
+      datasource: Prometheus
+
 grafana.ini:
   server:
     root_url: "http://grafana0213.kro.kr"
