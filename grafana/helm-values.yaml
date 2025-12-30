@@ -37,12 +37,14 @@ datasources:
     datasources:
     - name: Prometheus
       type: prometheus
+      uid: prometheus
       access: proxy
       url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
       isDefault: true
       editable: true
     - name: Loki
       type: loki
+      uid: loki
       access: proxy
       url: http://loki.loki.svc.cluster.local:3100
       editable: true
@@ -96,6 +98,11 @@ dashboards:
     longhorn:
       gnetId: 16888
       revision: 9
+      datasource: Prometheus
+    # MinIO
+    minio:
+      gnetId: 13502
+      revision: 26
       datasource: Prometheus
     # Cert-Manager
     cert-manager:
