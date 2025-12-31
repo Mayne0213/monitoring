@@ -11,4 +11,4 @@ resources:
   - prometheus/argocd.yaml
   - promtail/argocd.yaml
   - goldilocks/argocd.yaml
-  # - trivy/argocd.yaml  # installation cancelled - enable when resources available
+  - trivy/argocd.yaml

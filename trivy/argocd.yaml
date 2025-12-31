@@ -24,7 +24,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: trivy-system
   syncPolicy:
-    # automated sync disabled - installation cancelled
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
     - PrunePropagationPolicy=foreground
