@@ -20,32 +20,53 @@ serviceMonitor:
     release: prometheus
   namespace: prometheus
 
+# SMTP Secret 환경변수 주입
+extraEnv:
+  - name: SMTP_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: alertmanager-smtp
+        key: smtp_auth_password
+
 config:
   global:
     resolve_timeout: 5m
+    smtp_smarthost: "smtp.mail.me.com:587"
+    smtp_from: "bluemayne0213@icloud.com"
+    smtp_auth_username: "bluemayne0213@icloud.com"
+    smtp_auth_password: $(SMTP_PASSWORD)
+    smtp_require_tls: true
   route:
     group_by: ["alertname", "cluster", "service"]
-    group_wait: 10s
-    group_interval: 10s
-    repeat_interval: 12h
-    receiver: "default"
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 4h
+    receiver: "email"
     routes:
+    # Critical - 즉시 전송
     - match:
         severity: critical
-      receiver: "critical"
-      continue: true
+      receiver: "email"
+      group_wait: 10s
+      repeat_interval: 1h
+    # Warning
     - match:
         severity: warning
-      receiver: "warning"
+      receiver: "email"
+      group_wait: 1m
+      repeat_interval: 4h
+    # Watchdog 제외 (항상 firing)
+    - match:
+        alertname: Watchdog
+      receiver: "null"
   receivers:
-  - name: "default"
-    # 기본 수신자 (로그만 남김)
-  - name: "critical"
-    # TODO: Slack, Email 등 알림 채널 추가
-    # webhook_configs:
-    # - url: 'http://your-webhook-url'
-  - name: "warning"
-    # TODO: 경고 알림 채널 추가
+  - name: "email"
+    email_configs:
+    - to: "bluemayne0213@icloud.com"
+      send_resolved: true
+      headers:
+        subject: "[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}"
+  - name: "null"
   inhibit_rules:
   - source_match:
       severity: "critical"

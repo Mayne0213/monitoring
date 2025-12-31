@@ -24,10 +24,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: goldilocks
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-      allowEmpty: false
+    # automated sync disabled for resource optimization
     syncOptions:
     - CreateNamespace=true
     - PrunePropagationPolicy=foreground

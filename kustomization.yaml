@@ -10,5 +10,5 @@ resources:
   - node-exporter/argocd.yaml
   - prometheus/argocd.yaml
   - promtail/argocd.yaml
-  - goldilocks/argocd.yaml
-  - trivy/argocd.yaml
+  # - goldilocks/argocd.yaml  # disabled for resource optimization
+  # - trivy/argocd.yaml  # installation cancelled
