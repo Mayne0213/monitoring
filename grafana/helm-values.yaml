@@ -63,7 +63,7 @@ dashboardProviders:
 dashboards:
   default:
   
-    Global Dashboard
+    #Global Dashboard
     kubernetes-views-global:
       gnetId: 15757
       revision: 43
