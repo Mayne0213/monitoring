@@ -23,6 +23,18 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: prometheus
+  ignoreDifferences:
+  - group: external-secrets.io
+    kind: ExternalSecret
+    jsonPointers:
+    - /spec/data/0/remoteRef/conversionStrategy
+    - /spec/data/0/remoteRef/decodingStrategy
+    - /spec/data/0/remoteRef/metadataPolicy
+    - /spec/target/deletionPolicy
+  - group: monitoring.coreos.com
+    kind: ServiceMonitor
+    jqPathExpressions:
+    - .spec.endpoints[].metricRelabelings
   syncPolicy:
     automated:
       prune: true
