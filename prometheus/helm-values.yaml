@@ -7,7 +7,7 @@ fullnameOverride: ""
 
 # CRD 관리
 crds:
-  enabled: true  # ServerSideApply로 annotation 크기 문제 해결
+  enabled: false  # CRD annotation 크기 문제로 비활성화 (CRD는 이미 설치됨)
 
 # Prometheus Operator
 prometheusOperator:
