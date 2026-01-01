@@ -111,15 +111,16 @@ dashboards:
 
 grafana.ini:
   server:
-    root_url: "http://grafana0213.kro.kr"
+    root_url: "https://grafana0213.kro.kr"
   auth.anonymous:
-    enabled: false
+    enabled: true
+    org_role: Admin
   security:
     allow_embedding: true
   auth.basic:
     enabled: false
   auth:
-    disable_login_form: false
+    disable_login_form: true
     disable_signout_menu: true
   news:
     news_feed_enabled: false

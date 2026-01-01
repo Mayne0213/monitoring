@@ -4,11 +4,8 @@ metadata:
   name: grafana-ingress
   namespace: grafana
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    # HTTP를 HTTPS로 자동 리다이렉트
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    # cert-manager가 인증서를 자동으로 발급하도록 설정
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.middlewares: authelia-authelia-auth@kubernetescrd
 spec:
   ingressClassName: traefik
   # TLS 설정
