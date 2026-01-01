@@ -23,6 +23,8 @@ kubelet:
     cAdvisorRelabelings:
       - targetLabel: cluster
         replacement: "mayne-cluster"
+      - sourceLabels: [__metrics_path__]
+        targetLabel: metrics_path
     # Resource metrics
     resourceRelabelings:
       - targetLabel: cluster
