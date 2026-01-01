@@ -142,6 +142,14 @@ prometheus:
             action: replace
             target_label: namespace
 
+# API Server 메트릭 수집 비활성화 (메모리 절감: ~37k series)
+kubeApiServer:
+  enabled: false
+
+# etcd 메트릭 수집 비활성화 (메모리 절감: ~26k series)
+kubeEtcd:
+  enabled: false
+
 # Alertmanager (기존 alertmanager 사용)
 alertmanager:
   enabled: false
