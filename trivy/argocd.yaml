@@ -92,6 +92,11 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: trivy-system
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/template/spec/containers/0/resources/limits/cpu
   syncPolicy:
     automated:
       prune: true
@@ -100,6 +105,7 @@ spec:
     - CreateNamespace=true
     - PrunePropagationPolicy=foreground
     - PruneLast=true
+    - RespectIgnoreDifferences=true
     retry:
       limit: 5
       backoff:
