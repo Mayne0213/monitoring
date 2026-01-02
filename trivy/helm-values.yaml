@@ -52,7 +52,7 @@ trivy:
       cpu: 50m
       memory: 100M
     limits:
-      cpu: 500m
+      # cpu: removed to prevent throttling
       memory: 500M
 
 # 스캔 작업 설정
