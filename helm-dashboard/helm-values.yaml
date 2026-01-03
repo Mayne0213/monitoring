@@ -21,14 +21,9 @@ ingress:
   enabled: true
   className: traefik
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.middlewares: authelia-authelia@kubernetescrd
   hosts:
     - host: helm0213.kro.kr
       paths:
         - path: /
           pathType: Prefix
-  tls:
-    - secretName: helm-dashboard-tls
-      hosts:
-        - helm0213.kro.kr
