@@ -1,0 +1,34 @@
+# Helm Dashboard Helm Values
+# Chart: https://github.com/komodorio/helm-charts/tree/master/charts/helm-dashboard
+
+fullnameOverride: helm-dashboard
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
+  limits:
+    memory: 512Mi
+
+dashboard:
+  allowWriteActions: false
+  persistence:
+    enabled: true
+    storageClassName: local-path-retain
+    size: 100Mi
+
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.middlewares: authelia-authelia@kubernetescrd
+  hosts:
+    - host: helm0213.kro.kr
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: helm-dashboard-tls
+      hosts:
+        - helm0213.kro.kr
