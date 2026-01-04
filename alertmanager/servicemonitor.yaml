@@ -14,6 +14,10 @@ spec:
       relabelings:
         - targetLabel: cluster
           replacement: "mayne-cluster"
+        # Drop alertmanager-headless to avoid duplicate metrics
+        - sourceLabels: [__meta_kubernetes_service_name]
+          regex: alertmanager-headless
+          action: drop
   namespaceSelector:
     matchNames:
       - alertmanager
