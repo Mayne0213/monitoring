@@ -13,13 +13,6 @@ resources:
     cpu: 10m
     memory: 32Mi
 
-# Prometheus ServiceMonitor 설정
-serviceMonitor:
-  enabled: true
-  additionalLabels:
-    release: prometheus
-  namespace: prometheus
-
 # Disable default config - use secret instead
 config:
   enabled: false
